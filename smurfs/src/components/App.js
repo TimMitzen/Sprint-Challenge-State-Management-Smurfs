@@ -1,16 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
+import {Route} from 'react-router-dom';
+import {useSmurfActions} from '../actions/useSmurfActions';
+import SmurfContainer from '../smurfContainer/smurfContainer'
+import {ActionsProvider} from '../contexts/ActionsContext';
 import "./App.css";
-class App extends Component {
-  render() {
+const App =() => {
+  const actions = useSmurfActions();
+
     return (
-      <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
+      <ActionsProvider value={{actions}}>
+        <Route exact path='/'component={SmurfContainer}  />
+      </ActionsProvider>
     );
-  }
+  
 }
 
 export default App;
